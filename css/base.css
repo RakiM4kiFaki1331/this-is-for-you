@@ -1,0 +1,142 @@
+/* ============================================================
+   BASE.CSS — база: сброс, фон, снег, звёзды, экраны,
+   кнопки, ввод имени, переходы.
+   ============================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1a1a3e 0%, #2d1b4e 50%, #4a1d3f 100%);
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+#snow-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.6s ease;
+}
+.snowflake {
+  position: absolute;
+  top: -10px;
+  width: 20px;
+  height: 20px;
+  opacity: 0.8;
+  animation: fall linear infinite;
+  pointer-events: none;
+  user-select: none;
+}
+@keyframes fall {
+  to { transform: translateY(105vh); }
+}
+
+#stars-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.6s ease;
+}
+.star {
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  animation: twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%      { opacity: 1;   transform: scale(1.2); }
+}
+
+body.playing #snow-container { opacity: 0.12; }
+body.playing #stars-container { opacity: 0.3; }
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  z-index: 2;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(30px) scale(0.98);
+  transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
+}
+.screen.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+  text-shadow: 0 0 20px rgba(255, 100, 150, 0.8);
+}
+h2 { font-size: 2em; margin-bottom: 10px; }
+p  { font-size: 1.2em; margin-bottom: 20px; opacity: 0.9; }
+
+button {
+  padding: 15px 40px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 5px 20px rgba(255, 77, 109, 0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(255, 77, 109, 0.8);
+}
+button:active { transform: scale(0.97); }
+
+.name-label {
+  font-size: 1.2em;
+  margin-bottom: 12px;
+  display: block;
+}
+#name-input {
+  padding: 14px 20px;
+  font-size: 1.1em;
+  border-radius: 50px;
+  border: 2px solid rgba(255, 143, 163, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  outline: none;
+  text-align: center;
+  margin-bottom: 20px;
+  width: 280px;
+  transition: border-color 0.2s;
+}
+#name-input::placeholder { color: rgba(255, 255, 255, 0.5); }
+#name-input:focus { border-color: #ff8fa3; }
+
+.error {
+  color: #ff8fa3;
+  font-size: 1.1em;
+  margin-top: 15px;
+  min-height: 1.5em;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-8px); }
+  75%      { transform: translateX(8px); }
+}

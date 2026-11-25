@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="sf4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#a7ffeb"/>
+    </linearGradient>
+    <filter id="glow4" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#glow4)" stroke="url(#sf4)" stroke-width="2.5" stroke-linecap="round" fill="none">
+    <!-- Лучи -->
+    <line x1="50" y1="5" x2="50" y2="95"/>
+    <line x1="5" y1="50" x2="95" y2="50"/>
+    <line x1="16" y1="16" x2="84" y2="84"/>
+    <line x1="84" y1="16" x2="16" y2="84"/>
+    <!-- Завитки на концах -->
+    <path d="M50 15 Q60 20 50 25 Q40 30 50 35"/>
+    <path d="M50 85 Q60 80 50 75 Q40 70 50 65"/>
+    <path d="M15 50 Q20 40 25 50 Q30 60 35 50"/>
+    <path d="M85 50 Q80 40 75 50 Q70 60 65 50"/>
+    <path d="M22 22 Q30 30 25 35 Q20 40 28 45"/>
+    <path d="M78 78 Q70 70 75 65 Q80 60 72 55"/>
+    <path d="M78 22 Q70 30 75 35 Q80 40 72 45"/>
+    <path d="M22 78 Q30 70 25 65 Q20 60 28 55"/>
+  </g>
+  <!-- Центральный ромб -->
+  <path d="M50 40 L55 50 L50 60 L45 50 Z" fill="url(#sf4)"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <radialGradient id="sf3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#b2ebf2"/>
+      <stop offset="100%" stop-color="#26c6da"/>
+    </radialGradient>
+    <filter id="glow3" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g filter="url(#glow3)" fill="url(#sf3)">
+    <!-- 8 лучей -->
+    <polygon points="50,5 55,45 95,50 55,55 50,95 45,55 5,50 45,45"/>
+    <!-- Дополнительные лучи -->
+    <polygon points="20,20 45,45 80,20 55,45 80,80 55,55 20,80 45,55" opacity="0.7"/>
+  </g>
+  <circle cx="50" cy="50" r="6" fill="#fff"/>
+</svg>

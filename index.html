@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Для тебя ❤️</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Карта импорта для Three.js -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <!-- Стили -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/heart.css">
+  <link rel="stylesheet" href="css/prize.css">
+</head>
+<body>
+
+  <div id="snow-container"></div>
+  <div id="stars-container"></div>
+
+  <!-- Экран 1: Заставка -->
+  <section id="screen-start" class="screen active">
+    <h1>Для тебя, <span id="her-name">Любимая</span> ❤️</h1>
+    <p>У меня есть маленький сюрприз...</p>
+    <button id="start-btn" type="button">Открыть 🎁</button>
+  </section>
+
+  <!-- Экран 2: Ввод имени -->
+  <section id="screen-name" class="screen">
+    <h2>Прежде чем начать...</h2>
+    <label for="name-input" class="name-label">Напиши своё имя, Солнышко ☀️</label>
+    <input type="text" id="name-input" placeholder="Твоё имя..." autocomplete="off">
+    <button id="name-btn" type="button">Продолжить →</button>
+    <p id="name-error" class="error"></p>
+  </section>
+
+  <!-- Экран 3: Игра -->
+  <section id="screen-game" class="screen">
+    <h2>Собери 100 снежинок ❄️</h2>
+    <p>Каждые 3 подряд — комбо ×2!</p>
+
+    <div class="game-layout">
+      
+      <!-- ЛЕВАЯ КОЛОНКА: Интерактивное сердце-украшение -->
+      <div class="side-decoration">
+        <div class="heart-3d" id="heart-3d"></div>
+        <p style="font-size: 0.8em; opacity: 0.6; margin-top: 10px;">Покрути меня ✨</p>
+      </div>
+
+      <!-- ЦЕНТР: Игровое поле -->
+      <div id="game-area">
+        <div id="combo-popup" class="combo-popup"></div>
+      </div>
+
+      <!-- ПРАВАЯ КОЛОНКА: Банка и счётчик -->
+      <div class="heart-progress">
+        <div class="jar-3d-wrap">
+          <div class="jar-3d" id="jar-3d"></div>
+        </div>
+        <div class="heart-counter" id="score">0 / 100</div>
+        <div class="combo-indicator" id="combo-indicator">Комбо: 0</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Экран 4: Приз -->
+  <section id="screen-prize" class="screen">
+    <h2 id="prize-title">Ты справилась! 🎉</h2>
+    <p id="prize-hint">Нажми на конверт 4 раза, чтобы открыть письмо</p>
+
+    <div class="envelope-scene">
+      <div class="envelope" id="envelope">
+        <img src="assets/envelope.svg" class="envelope-img" alt="Конверт">
+        <div class="envelope-hit" id="envelope-hit"></div>
+        <div class="envelope-seal">❤</div>
+      </div>
+
+      <div class="letter-flip" id="letter-flip">
+        <div class="letter-glow"></div>
+        <div class="letter-face letter-front">
+          <div class="letter-content">
+            <p>Дорогая моя Сонечка,</p>
+            <p>Этот маленький сайт я собрал для тебя — по кусочку, как собирают самое дорогое. В каждой строчке здесь только ты, мой самый тёплый и любимый человек.</p>
+            <p>Спасибо, что ты рядом. За твою улыбку, за твоё тепло, за каждый день, который становится особенным, потому что в нём есть ты.</p>
+            <p class="letter-final">С Новым годом, любимая! Пусть следующий год будет таким же светлым, как ты сама. ✨</p>
+            <p class="signature">Твой Ромочка</p>
+            <p class="flip-hint">↻ Нажми на записку, чтобы перевернуть</p>
+            
+            <!-- Кнопка перехода в альбом -->
+            <button id="go-to-album-btn" type="button" style="margin-top: 20px; font-size: 1em; padding: 10px 20px; background: #ff4d6d;">Наши фотографии 📸</button>
+          </div>
+        </div>
+        <div class="letter-face letter-back">
+          <div class="letter-heart-emoji" style="font-size: 5em; animation: pulse 1.5s infinite;">❤️</div>
+          <div class="letter-love">Я тебя безумно сильно Люблю!!!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Экран 5: Альбом с фотографиями -->
+  <section id="screen-album" class="screen">
+    <h2>Наши самые лучшие моменты 📸</h2>
+    
+    <!-- Сетка с фото -->
+    <div class="album-grid" id="album-grid">
+      <!-- Замени эти пути на свои фотографии -->
+      <img src="assets/photos/1.jpg" alt="Фото 1" onclick="openFullscreen(this)">
+      <img src="assets/photos/2.jpg" alt="Фото 2" onclick="openFullscreen(this)">
+      <img src="assets/photos/3.jpg" alt="Фото 3" onclick="openFullscreen(this)">
+      <img src="assets/photos/4.jpg" alt="Фото 4" onclick="openFullscreen(this)">
+      <img src="assets/photos/5.jpg" alt="Фото 5" onclick="openFullscreen(this)">
+      <img src="assets/photos/6.jpg" alt="Фото 6" onclick="openFullscreen(this)">
+      <img src="assets/photos/7.jpg" alt="Фото 7" onclick="openFullscreen(this)">
+      <img src="assets/photos/8.jpg" alt="Фото 8" onclick="openFullscreen(this)">
+      <img src="assets/photos/9.jpg" alt="Фото 9" onclick="openFullscreen(this)">
+      <img src="assets/photos/10.jpg" alt="Фото 10" onclick="openFullscreen(this)">
+    </div>
+
+    <button id="back-to-prize-btn" type="button" style="margin-top: 30px;">← Назад к письму</button>
+  </section>
+
+  <!-- Подключаем главный скрипт -->
+  <script type="module" src="skript/main.js"></script>
+
+  <!-- Скрипт для просмотра фото на весь экран -->
+  <script>
+    function openFullscreen(img) {
+      // Если фото не загрузилось (нет файла) — ничего не делаем
+      if (!img || !img.src) return;
+      
+      const overlay = document.createElement('div');
+      overlay.style.position = 'fixed';
+      overlay.style.inset = '0';
+      overlay.style.background = 'rgba(0,0,0,0.9)';
+      overlay.style.zIndex = '9999';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.style.cursor = 'pointer';
+      
+      const fullImg = document.createElement('img');
+      fullImg.src = img.src;
+      fullImg.style.maxWidth = '95%';
+      fullImg.style.maxHeight = '95vh';
+      fullImg.style.borderRadius = '10px';
+      fullImg.style.boxShadow = '0 0 50px rgba(255, 77, 109, 0.8)';
+      
+      overlay.appendChild(fullImg);
+      document.body.appendChild(overlay);
+      
+      overlay.addEventListener('click', () => {
+        overlay.remove();
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 29.6">
+  <defs>
+    <linearGradient id="hg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#ffd6dd"/>
+      <stop offset="30%"  stop-color="#ff8fa3"/>
+      <stop offset="65%"  stop-color="#ff4d6d"/>
+      <stop offset="100%" stop-color="#a4133c"/>
+    </linearGradient>
+    <radialGradient id="hShine" cx="35%" cy="30%" r="40%">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="0.8" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <path filter="url(#glow)"
+        d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+           c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
+        fill="url(#hg)"
+        stroke="#ffb3c1"
+        stroke-width="0.4"/>
+
+  <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+           c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
+        fill="url(#hShine)"/>
+</svg>
